@@ -24,7 +24,6 @@ class reco_vocal:
             return request
 
         except Exception as e:
-            print(e)
             self.readText("Je n'ai pas compris, pouvez vous répéter ?")
             self.command()
             return None

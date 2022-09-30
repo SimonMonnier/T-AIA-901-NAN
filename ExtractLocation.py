@@ -20,7 +20,7 @@ class ExtractLocation:
 
     def train(self):
         df = pd.read_csv(
-            "data/data_sentence_train.csv")
+            "data/data_sentence_train.csv", encoding='utf8')
         df.dropna(inplace=True)
 
         blanks = []
@@ -31,7 +31,7 @@ class ExtractLocation:
         df.drop(blanks, inplace=True)
 
         X = df['sentence']
-        y = df['label']
+        y = df['tag']
 
         X_train, self.X_test, y_train, self.y_test = train_test_split(
             X, y, test_size=0.33, random_state=42)
@@ -62,9 +62,12 @@ class ExtractLocation:
         if doc.ents:
             for ent in doc.ents:
                 locations.append(ent.text)
-            if len(locations == 2):
+            lenArray =len(locations)
+            if lenArray == 2:
+                if "depuis" in sentence.lower() or "partir" in sentence.lower() or "partant" in sentence.lower():
+                    locations = locations[::-1]
                 return locations
             else:
-                return None
+                return []
         else:
-            return None
+            return []

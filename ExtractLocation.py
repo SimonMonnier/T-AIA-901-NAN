@@ -8,7 +8,7 @@ import pickle
 import spacy
 
 
-class NLP:
+class ExtractLocation:
 
     def __init__(self) -> None:
         self.text_clf = Pipeline([('tfidf', TfidfVectorizer()),

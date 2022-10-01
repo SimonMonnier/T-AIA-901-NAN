@@ -147,4 +147,4 @@ while i < len(cities_name):
     df_new = pd.concat([df_new, df_tmp])
     i += 1
 
-df_new.to_csv('model/data_sentence_train.csv')
+df_new.to_csv('data/data_sentence_train.csv')

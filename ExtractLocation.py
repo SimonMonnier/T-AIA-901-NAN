@@ -57,16 +57,20 @@ class ExtractLocation:
         print("accuracy score: ", accuracy_score(self.y_test, predictions))
 
     def extract_location(self, sentence):
-        doc = self.nlp(sentence)
-        locations = []
-        if doc.ents:
-            for ent in doc.ents:
-                locations.append(ent.text)
-            lenArray =len(locations)
-            if lenArray == 2:
-                if "depuis" in sentence.lower() or "partir" in sentence.lower() or "partant" in sentence.lower():
-                    locations = locations[::-1]
-                return locations
+        loaded_model = pickle.load(open(self.filename, 'rb'))
+        if loaded_model.predict([sentence]) == 'command':
+            doc = self.nlp(sentence)
+            locations = []
+            if doc.ents:
+                for ent in doc.ents:
+                    locations.append(ent.text)
+                lenArray =len(locations)
+                if lenArray == 2:
+                    if "depuis" in sentence.lower() or "partir" in sentence.lower() or "partant" in sentence.lower():
+                        locations = locations[::-1]
+                    return locations
+                else:
+                    return []
             else:
                 return []
         else:

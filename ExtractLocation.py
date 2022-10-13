@@ -14,6 +14,7 @@ class ExtractLocation:
         self.text_clf = Pipeline([('tfidf', TfidfVectorizer()),
                                   ('clf', LinearSVC())])
         self.X_test = None
+        self.y_test = None
         self.filename = 'model/nlp_command_model.sav'
         self.nlp = spacy.load('fr_core_news_lg')
 

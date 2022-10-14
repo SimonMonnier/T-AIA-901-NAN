@@ -76,6 +76,8 @@ pip install --exists-action i --upgrade tensorflow
 pip install --exists-action i --upgrade keras
 pip install pyttsx3=2.9
 pip install pipwin
+pip install NetworkX==2.6.3
+pip install Scipy==1.8
 pipwin install pyaudio
 python -m spacy download fr
 conda update -y --all

@@ -15,10 +15,10 @@ class Search_path:
                 nodes_b = self.dfTimeTables["trajet"][j].split(" - ")
                 if nodes_a[0] == nodes_b[0]:
                     time = self.dfTimeTables["duree"][j]
-                    self.Graphe.add_edge(nodes_a[0], nodes_b[1], poids=time)
+                    self.Graphe.add_edge(nodes_a[0], nodes_b[1], weight=time)
                 if nodes_a[0] == nodes_b[1]:
                     time = self.dfTimeTables["duree"][j]
-                    self.Graphe.add_edge(nodes_a[0], nodes_b[0], poids=time)
+                    self.Graphe.add_edge(nodes_a[0], nodes_b[0], weight=time)
                 j += 1
             i += 1
 
@@ -45,12 +45,12 @@ class Search_path:
             k = 0
             l = 0
             m = 1
-            df = pd.DataFrame(columns=['id','Trajet'])
+            df = pd.DataFrame(columns=['id','Trajet', 'Durée en min'])
 
             while k < len(src_tab):
                 while l < len(dest_tab):
-                    trajet = nx.dijkstra_path(self.Graphe, source=src_tab[k], target=dest_tab[l], weight='weight')
-                    new_row = {'id': f"{m}",'Trajet': f"{trajet}" }
+                    length, trajet = nx.bidirectional_dijkstra(self.Graphe, source=src_tab[k], target=dest_tab[l], weight='weight')
+                    new_row = {'id': f"{m}",'Trajet': f"{trajet}",'Durée en min': f"{length}" }
                     df_tmp = pd.DataFrame(new_row, index=[0])
                     df = pd.concat([df, df_tmp])
                     l += 1
@@ -61,8 +61,8 @@ class Search_path:
             l = 0
             while k < len(dest_tab):
                 while l < len(src_tab):
-                    trajet = nx.dijkstra_path(self.Graphe, source=src_tab[l], target=dest_tab[k], weight='weight')
-                    new_row = {'id': f"{m}",'Trajet': f"{trajet}" }
+                    length, trajet = nx.bidirectional_dijkstra(self.Graphe, source=src_tab[l], target=dest_tab[k], weight='weight')
+                    new_row = {'id': f"{m}",'Trajet': f"{trajet}",'Durée en min': f"{length}" }
                     df_tmp = pd.DataFrame(new_row, index=[0])
                     df = pd.concat([df, df_tmp])
                     l += 1
@@ -73,4 +73,4 @@ class Search_path:
             return df
         else:
             
-            return pd.DataFrame(columns=['id','Trajet'])
+            return pd.DataFrame(columns=['id','Trajet', 'Durée en min'])

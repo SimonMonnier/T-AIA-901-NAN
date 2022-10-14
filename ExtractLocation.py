@@ -71,8 +71,8 @@ class ExtractLocation:
                         locations = locations[::-1]
                     return locations
                 else:
-                    return []
+                    return None
             else:
-                return []
+                return None
         else:
-            return []
+            return None

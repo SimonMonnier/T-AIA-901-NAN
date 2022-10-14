@@ -8,7 +8,7 @@ from sklearn.metrics import confusion_matrix, classification_report, accuracy_sc
 import pickle
 import pandas as pd
 
-class reco_vocal:
+class Reco_vocal:
     def __init__(self):
         self.speech  = sr.Recognizer()
         self.mic = sr.Microphone()

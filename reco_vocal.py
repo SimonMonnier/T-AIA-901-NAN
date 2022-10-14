@@ -63,7 +63,7 @@ class Reco_vocal:
         try:
             loaded_model = pickle.load(open(self.filename, 'rb'))
 
-            self.readText("Je vous écoute.")
+            self.readText("Comment puis je vous aider ? Je vous écoute.")
 
             with self.mic as source:
                 self.speech.pause_threshold = 1

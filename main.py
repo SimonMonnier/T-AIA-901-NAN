@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
         if request != None:
             locations = el.extract_location(request)
-
+            print(locations)
             if locations != None:
                 path = sp.search_path(locations[0], locations[1])
 

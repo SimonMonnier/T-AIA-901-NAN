@@ -17,6 +17,7 @@ class ExtractLocation:
         self.y_test = None
         self.filename = 'model/nlp_command_model.sav'
         self.nlp = spacy.load('fr_core_news_lg')
+        self.loaded_model = pickle.load(open(self.filename, 'rb'))
 
 
     def train(self):
@@ -43,12 +44,10 @@ class ExtractLocation:
 
 
     def predict(self, sentence):
-        loaded_model = pickle.load(open(self.filename, 'rb'))
-        return loaded_model.predict([sentence])
+        return self.loaded_model.predict([sentence])
 
     def metrics(self):
-        loaded_model = pickle.load(open(self.filename, 'rb'))
-        predictions = loaded_model.predict(self.X_test)
+        predictions = self.loaded_model.predict(self.X_test)
         df = pd.DataFrame(confusion_matrix(self.y_test, predictions), index=[
                           'not_command', 'command'], columns=['not_command', 'command'])
         print(df)
@@ -58,8 +57,7 @@ class ExtractLocation:
         print("accuracy score: ", accuracy_score(self.y_test, predictions))
 
     def extract_location(self, sentence):
-        loaded_model = pickle.load(open(self.filename, 'rb'))
-        if loaded_model.predict([sentence]) == 'command':
+        if self.loaded_model.predict([sentence]) == 'command':
             doc = self.nlp(sentence)
             locations = []
             if doc.ents:

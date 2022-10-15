@@ -18,6 +18,7 @@ class Reco_vocal:
         self.X_test = None
         self.y_test = None
         self.filename = 'model/nlp_language_model.sav'
+        self.loaded_model = pickle.load(open(self.filename, 'rb'))
 
     def train(self):
         df = pd.read_csv(
@@ -43,12 +44,10 @@ class Reco_vocal:
 
 
     def predict(self, sentence):
-        loaded_model = pickle.load(open(self.filename, 'rb'))
-        return loaded_model.predict([sentence])
+        return self.loaded_model.predict([sentence])
 
     def metrics(self):
-        loaded_model = pickle.load(open(self.filename, 'rb'))
-        predictions = loaded_model.predict(self.X_test)
+        predictions = self.loaded_model.predict(self.X_test)
         print(confusion_matrix(self.y_test, predictions))
         print('\n\n')
         print(classification_report(self.y_test, predictions))
@@ -61,16 +60,14 @@ class Reco_vocal:
 
     def command(self):
         try:
-            loaded_model = pickle.load(open(self.filename, 'rb'))
-
-            self.readText("Comment puis je vous aider ? Je vous écoute.")
+            self.readText("Quel trajet voulez vous rechercher ? Je vous écoute.")
 
             with self.mic as source:
                 self.speech.pause_threshold = 1
                 audio = self.speech.listen(source)
             request = self.speech.recognize_google(audio, language='fr-FR')
 
-            if loaded_model.predict([request]) == 'French':
+            if self.loaded_model.predict([request]) == 'French':
                 return request
             else :
                 self.readText("Veuillez reformuler votre demande en français.")

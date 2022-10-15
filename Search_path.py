@@ -45,12 +45,12 @@ class Search_path:
             k = 0
             l = 0
             m = 1
-            df = pd.DataFrame(columns=['id','Trajet', 'Durée en min'])
+            df = pd.DataFrame(columns=['id','Trajet', 'Durée'])
 
             while k < len(src_tab):
                 while l < len(dest_tab):
                     length, trajet = nx.bidirectional_dijkstra(self.Graphe, source=src_tab[k], target=dest_tab[l], weight='weight')
-                    new_row = {'id': f"{m}",'Trajet': f"{trajet}",'Durée en min': f"{length}" }
+                    new_row = {'id': f"{m}",'Trajet': f"{trajet}",'Durée': f"{length}" }
                     df_tmp = pd.DataFrame(new_row, index=[0])
                     df = pd.concat([df, df_tmp])
                     l += 1
@@ -62,7 +62,7 @@ class Search_path:
             while k < len(dest_tab):
                 while l < len(src_tab):
                     length, trajet = nx.bidirectional_dijkstra(self.Graphe, source=src_tab[l], target=dest_tab[k], weight='weight')
-                    new_row = {'id': f"{m}",'Trajet': f"{trajet}",'Durée en min': f"{length}" }
+                    new_row = {'id': f"{m}",'Trajet': f"{trajet}",'Durée': f"{length}" }
                     df_tmp = pd.DataFrame(new_row, index=[0])
                     df = pd.concat([df, df_tmp])
                     l += 1
@@ -70,7 +70,9 @@ class Search_path:
                 k += 1
                 m += 1
             df = df.drop_duplicates(subset ="Trajet", keep = 'first')
+            df = df.sort_values(by=['Durée'])
+            df = df.head(1)
             return df
         else:
             
-            return pd.DataFrame(columns=['id','Trajet', 'Durée en min'])
+            return pd.DataFrame(columns=['id','Trajet', 'Durée'])

@@ -60,7 +60,7 @@ class Reco_vocal:
 
     def command(self):
         try:
-            self.readText("Quel trajet voulez vous rechercher ? Je vous écoute.")
+            self.readText("Je suis à votre écoute.")
 
             with self.mic as source:
                 self.speech.pause_threshold = 1

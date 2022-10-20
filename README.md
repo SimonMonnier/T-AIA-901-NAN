@@ -33,7 +33,7 @@ activate nlp
 For **Mac**, do this:
 
 ```
-source activate tensorflow
+source activate nlp
 ```
 
 # Installing Jupyter
@@ -106,4 +106,10 @@ print(f"Python {sys.version}")
 print(f"Pandas {pd.__version__}")
 print(f"Scikit-Learn {sk.__version__}")
 print("GPU is", "available" if tf.test.is_gpu_available() else "NOT AVAILABLE")
+```
+
+# Launch project
+
+```
+python main.py
 ```

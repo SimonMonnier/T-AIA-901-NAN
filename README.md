@@ -33,7 +33,7 @@ activate nlp
 For **Mac**, do this:
 
 ```
-source activate tensorflow
+source activate nlp
 ```
 
 # Installing Jupyter

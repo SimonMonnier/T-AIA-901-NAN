@@ -24,9 +24,15 @@ class Orchestrator:
                 if path.empty:
                     self.rc.readText("Aucun trajet n'est disponible, veuillez reformuler votre demande.")
                 else:
-                    print(tabulate(path, headers = 'keys', tablefmt = 'psql'))
-                    
-                    messagebox.showinfo("Trajet le plus court",tabulate(path, headers = 'keys', tablefmt = 'psql'))
+                    fenetre = Tk()
+                    fenetre.title('Result')
+                    l = LabelFrame(fenetre, text="Trajet de "+locations[0]+" à "+locations[1], padx=20, pady=20)
+                    l.pack(fill="both", expand="yes")
+                    paths = path["Trajet"][0].split('\n')
+                    for i in paths:
+                        label = Label(l, text=i)
+                        label.pack()
+                    fenetre.mainloop()
             else:
                 self.rc.readText("Je ne peux pas répondre à votre demande. Je suis un assitant de voyage.")
         else:
@@ -44,8 +50,7 @@ class Orchestrator:
                 if path.empty:
                     self.rc.readText("Aucun trajet n'est disponible, veuillez reformuler votre demande.")
                 else:
-                    print(tabulate(path, headers = 'keys', tablefmt = 'psql'))
-                    
+
                     messagebox.showinfo("Trajet le plus court",tabulate(path, headers = 'keys', tablefmt = 'psql'))
             else:
                 self.rc.readText("Je ne peux pas répondre à votre demande. Je suis un assitant de voyage.")
@@ -55,6 +60,7 @@ class Orchestrator:
 
     def orchestrator(self):
         fenetre = Tk()
+        fenetre.title('Travel Order Resolver')
         photo = PhotoImage(file="image/chargement.png")
         canvas = Canvas(fenetre,width=640, height=380)
         canvas.create_image(0, 0, anchor=NW, image=photo)

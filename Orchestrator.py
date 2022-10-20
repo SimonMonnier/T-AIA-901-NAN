@@ -12,14 +12,34 @@ class Orchestrator:
         self.el = ExtractLocation()
         self.sp = Search_path()
 
-    def search(self):
+    def search_shortest_path(self):
         request = self.rc.command()
 
         if request != None:
             locations = self.el.extract_location(request)
 
             if locations != None:
-                path = self.sp.search_path(locations[0], locations[1])
+                path = self.sp.search_shortest_path(locations[0], locations[1])
+
+                if path.empty:
+                    self.rc.readText("Aucun trajet n'est disponible, veuillez reformuler votre demande.")
+                else:
+                    print(tabulate(path, headers = 'keys', tablefmt = 'psql'))
+                    
+                    messagebox.showinfo("Trajet le plus court",tabulate(path, headers = 'keys', tablefmt = 'psql'))
+            else:
+                self.rc.readText("Je ne peux pas répondre à votre demande. Je suis un assitant de voyage.")
+        else:
+            self.rc.readText("Je n'ai pas compris votre demande.")
+
+    def search_all_path(self):
+        request = self.rc.command()
+
+        if request != None:
+            locations = self.el.extract_location(request)
+
+            if locations != None:
+                path = self.sp.search_all_path(locations[0], locations[1])
 
                 if path.empty:
                     self.rc.readText("Aucun trajet n'est disponible, veuillez reformuler votre demande.")
@@ -40,7 +60,9 @@ class Orchestrator:
         canvas.create_image(0, 0, anchor=NW, image=photo)
         canvas.pack()
 
-        button = Button(fenetre, text ="Search", command = self.search)
-        button.pack()
+        Sp = Button(fenetre, text ="Search Shortest Path", command = self.search_shortest_path)
+        Sp.pack()
+        Ap = Button(fenetre, text ="Search All Path", command = self.search_all_path)
+        Ap.pack()
         
         canvas.mainloop()

@@ -15,7 +15,7 @@ class ExtractLocation:
                                   ('clf', LinearSVC())])
         self.X_test = None
         self.y_test = None
-        self.filename = 'model/nlp_command_model.sav'
+        self.filename = '../model/nlp_command_model.sav'
         self.nlp = spacy.load('fr_core_news_lg')
         self.loaded_model = pickle.load(open(self.filename, 'rb'))
 

@@ -17,7 +17,7 @@ class Reco_vocal:
                                   ('clf', LinearSVC())])
         self.X_test = None
         self.y_test = None
-        self.filename = 'model/nlp_language_model.sav'
+        self.filename = '../model/nlp_language_model.sav'
         self.loaded_model = pickle.load(open(self.filename, 'rb'))
 
     def train(self):

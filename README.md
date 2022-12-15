@@ -110,6 +110,7 @@ print("GPU is", "available" if tf.test.is_gpu_available() else "NOT AVAILABLE")
 
 # Launch project
 
+To launch the project, you have to go to the ui directory and execute this command
 ```
 python main.py
 ```

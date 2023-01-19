@@ -64,6 +64,7 @@ class Reco_vocal:
 
             with self.mic as source:
                 self.speech.pause_threshold = 1
+                self.speech.adjust_for_ambient_noise(source)
                 audio = self.speech.listen(source)
             request = self.speech.recognize_google(audio, language='fr-FR')
 

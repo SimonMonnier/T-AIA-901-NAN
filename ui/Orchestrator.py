@@ -9,6 +9,9 @@ import tkinter
 import customtkinter
 import pandas as pd
 import os
+import openai
+
+openai.api_key = "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"
 
 PATH = os.path.dirname(os.path.realpath(__file__))
 
@@ -89,8 +92,17 @@ class Orchestrator(customtkinter.CTk):
                 else:
                     self.show_path(path)
             else:
-                self.rc.readText("Je ne peux pas répondre à votre demande. Je suis un assitant de voyage.")
-                self.show_error(message="Je ne peux pas répondre à votre demande. Je suis un assitant de voyage.")
+                response = openai.Completion.create(
+                    model="text-davinci-003",
+                    prompt="Je suis un robot très intelligent qui répond aux questions. Si vous me posez une question qui est ancrée dans la vérité, je vous donnerai la réponse. Si vous me posez une question qui n'a pas de sens, qui est truquée ou qui n'a pas de réponse claire, je répondrai par une blague court sur l'intelligence artificielle.\n\nQ : Quelle est l'espérance de vie humaine aux États-Unis ?\nR : L'espérance de vie humaine aux États-Unis est de 78 ans.\n\nQ : Qui était président des États-Unis en 1955 ?\nR : Dwight D. Eisenhower était président des États-Unis en 1955.\n\nQ : A quel parti appartenait-il ?\nR : Il appartenait au parti républicain.\n\nQ : Quelle est la racine carrée de la banane ?\nR : Inconnu\n\nQ : Comment fonctionne un télescope ?\nR : Les télescopes utilisent des lentilles ou des miroirs pour concentrer la lumière et faire paraître les objets plus proches.\n\nQ : Où se sont déroulés les Jeux olympiques de 1992 ?\nR : Les Jeux olympiques de 1992 ont eu lieu à Barcelone, en Espagne.\n\nQ : Combien de squigs y a-t-il dans un bonk ?\nR : Inconnu\n\nQ : " + request,
+                    temperature=0.7,
+                    max_tokens=256,
+                    top_p=1,
+                    frequency_penalty=0,
+                    presence_penalty=0
+                    )
+                self.rc.readText(response['choices'][0]['text'].replace("R :",""))
+                self.show_error(response['choices'][0]['text'].replace("R :",""))
         else:
             self.rc.readText("Je n'ai pas compris votre demande.")
             self.show_error(message="Je n'ai pas compris votre demande.")

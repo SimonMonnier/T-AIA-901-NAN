@@ -51,41 +51,6 @@ Once Jupyter is installed, it is started with the following command:
 jupyter notebook
 ```
 
-The following packages are needed :
-
-```
-conda install -y scipy
-conda install -c conda-forge spacy
-pip install --exists-action i --upgrade sklearn
-pip install --exists-action i --upgrade pandas
-pip install --exists-action i --upgrade pandas-datareader
-pip install --exists-action i --upgrade matplotlib
-pip install --exists-action i --upgrade pillow
-pip install --exists-action i --upgrade tqdm
-pip install --exists-action i --upgrade requests
-pip install --exists-action i --upgrade h5py
-pip install --exists-action i --upgrade pyyaml
-pip install --exists-action i --upgrade tensorflow_hub
-pip install --exists-action i --upgrade bayesian-optimization
-pip install --exists-action i --upgrade spacy
-pip install --exists-action i --upgrade gensim
-pip install --exists-action i --upgrade flask
-pip install --exists-action i --upgrade boto3
-pip install --exists-action i --upgrade gym
-pip install --exists-action i --upgrade opencv-python
-pip install --exists-action i --upgrade tensorflow
-pip install --exists-action i --upgrade keras
-pip install pyttsx3=2.9
-pip install pipwin
-pip install NetworkX==2.6.3
-pip install Scipy==1.8
-pip install tk
-pipwin install pyaudio
-python -m spacy download fr
-conda update -y --all
-
-```
-
 You should also link your new **tensorflow** environment to Jupyter so that you can choose it as a Kernal.  Always make sure to run your Jupyter notebooks from your 3.9 kernel.
 
 ```
@@ -113,18 +78,25 @@ print("GPU is", "available" if tf.test.is_gpu_available() else "NOT AVAILABLE")
 
 To launch the project you have to install packages from the requirements.txt file.
 To do so, go to the ui directory:
+
 ````
 cd ui/
 ````
+
 Next, install packages:
+
 ````
 pip install -r requirements.txt
 ````
+
 Install also french trained model from spacy:
+
 ````
 python -m spacy download fr_core_news_lg
 ````
+
 After that, you can launch the project properly:
+
 ````
 python main.py
 ````

@@ -22,7 +22,7 @@ class Reco_vocal:
 
     def train(self):
         df = pd.read_csv(
-            "data/sentence_language.csv", encoding='utf8')
+            "../data/sentence_language.csv", encoding='utf8')
         df.dropna(inplace=True)
 
         blanks = []

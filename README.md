@@ -1,3 +1,4 @@
+
 # T-AIA-901-NAN_2
  
 # Software Installation
@@ -110,7 +111,16 @@ print("GPU is", "available" if tf.test.is_gpu_available() else "NOT AVAILABLE")
 
 # Launch project
 
-To launch the project, you have to go to the ui directory and execute this command
-```
+To launch the project you have to install packages from the requirements.txt file.
+To do so, go to the ui directory:
+````
+cd ui/
+````
+Next, install packages:
+````
+pip install -r requirements.txt
+````
+After that, you can launch the project properly:
+````
 python main.py
-```
+````

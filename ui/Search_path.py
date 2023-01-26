@@ -27,15 +27,27 @@ class Search_path:
         src_tab = []
         dest_tab = []
 
+        src_lyon = False
+        dest_lyon = False
+
+        if src.lower() == "lyon":
+            src_tab.append("Gare de Lyon-Perrache")
+            src_tab.append("Gare de Lyon-Part-Dieu")
+            src_lyon = True
+        elif dest.lower() == "lyon":
+            dest_tab.append("Gare de Lyon-Perrache")
+            dest_tab.append("Gare de Lyon-Part-Dieu")
+            dest_lyon = True
+        
         while i < len(self.dfTimeTables):
             nodes = self.dfTimeTables["trajet"][i].split(" - ")
-            if src.lower() in nodes[0].lower():
+            if src.lower() in nodes[0].lower() and src_lyon == False:
                 src_tab.append(nodes[0])
-            if src.lower() in nodes[1].lower():
+            if src.lower() in nodes[1].lower() and src_lyon == False:
                 src_tab.append(nodes[1])
-            if dest.lower() in nodes[0].lower():
+            if dest.lower() in nodes[0].lower() and dest_lyon == False:
                 dest_tab.append(nodes[0])
-            if dest.lower() in nodes[1].lower():
+            if dest.lower() in nodes[1].lower() and dest_lyon == False:
                 dest_tab.append(nodes[1])
             i += 1
 
@@ -93,15 +105,27 @@ class Search_path:
         src_tab = []
         dest_tab = []
 
+        src_lyon = False
+        dest_lyon = False
+
+        if src.lower() == "lyon":
+            src_tab.append("Gare de Lyon-Perrache")
+            src_tab.append("Gare de Lyon-Part-Dieu")
+            src_lyon = True
+        elif dest.lower() == "lyon":
+            dest_tab.append("Gare de Lyon-Perrache")
+            dest_tab.append("Gare de Lyon-Part-Dieu")
+            dest_lyon = True
+        
         while i < len(self.dfTimeTables):
             nodes = self.dfTimeTables["trajet"][i].split(" - ")
-            if src.lower() in nodes[0].lower():
+            if src.lower() in nodes[0].lower() and src_lyon == False:
                 src_tab.append(nodes[0])
-            if src.lower() in nodes[1].lower():
+            if src.lower() in nodes[1].lower() and src_lyon == False:
                 src_tab.append(nodes[1])
-            if dest.lower() in nodes[0].lower():
+            if dest.lower() in nodes[0].lower() and dest_lyon == False:
                 dest_tab.append(nodes[0])
-            if dest.lower() in nodes[1].lower():
+            if dest.lower() in nodes[1].lower() and dest_lyon == False:
                 dest_tab.append(nodes[1])
             i += 1
 

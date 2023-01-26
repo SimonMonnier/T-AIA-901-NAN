@@ -104,6 +104,6 @@ python main.py
 
 You can test each module in the notebooks folder at root.
 Each module have its file:
-Extraction Location -> test_class_extraction_location.ipynb
-Search Path -> test_class_search_path.ipynb
-Vocal Recognition -> test_class_reco_vocal.ipynb
+- Extraction Location -> test_class_extraction_location.ipynb
+- Search Path -> test_class_search_path.ipynb
+- Vocal Recognition -> test_class_reco_vocal.ipynb

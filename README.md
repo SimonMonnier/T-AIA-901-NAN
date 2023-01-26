@@ -1,4 +1,5 @@
 
+  
 # T-AIA-901-NAN_2
  
 # Software Installation
@@ -74,7 +75,7 @@ print(f"Scikit-Learn {sk.__version__}")
 print("GPU is", "available" if tf.test.is_gpu_available() else "NOT AVAILABLE")
 ```
 
-# Launch project
+# Launch main project
 
 To launch the project you have to install packages from the requirements.txt file.
 To do so, go to the ui directory:
@@ -100,3 +101,9 @@ After that, you can launch the project properly:
 ````
 python main.py
 ````
+
+You can test each module in the notebooks folder at root.
+Each module have its file:
+Extraction Location -> test_class_extraction_location.ipynb
+Search Path -> test_class_search_path.ipynb
+Vocal Recognition -> test_class_reco_vocal.ipynb

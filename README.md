@@ -122,7 +122,7 @@ pip install -r requirements.txt
 ````
 Install also french trained model from spacy:
 ````
-python -m spacy download fr
+python -m spacy download fr_core_news_lg
 ````
 After that, you can launch the project properly:
 ````

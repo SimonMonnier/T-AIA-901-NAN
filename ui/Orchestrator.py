@@ -78,13 +78,20 @@ class Orchestrator(customtkinter.CTk):
 
     # TODO: Connect to app
     def search_shortest_path_by_vocal(self):
+        self.entryRequest.configure(text="")
         request = self.rc.command()
 
         if request is not None:
+            self.entryRequest.configure(text="Recherche : " + request)
             locations = self.el.extract_location(request)
 
             if locations is not None:
                 path = self.sp.search_shortest_path(locations[0], locations[1])
+
+                self.entryDeparture.delete(0)
+                self.entryDeparture.insert(0, locations[0])
+                self.entryDestination.delete(0)
+                self.entryDestination.insert(0, locations[1])
 
                 if path.empty:
                     self.rc.readText("Aucun trajet n'est disponible, veuillez reformuler votre demande.")
@@ -108,6 +115,7 @@ class Orchestrator(customtkinter.CTk):
             self.show_error(message="Je n'ai pas compris votre demande.")
 
     def search_shortest_path_by_text(self):
+        self.entryRequest.configure(text="")
         departure = self.entryDeparture.get()
         destination = self.entryDestination.get()
 
@@ -232,6 +240,11 @@ class Orchestrator(customtkinter.CTk):
                                                     fg_color="green",
                                                     command=self.search_shortest_path_by_text)
         self.buttonSearch.grid(row=1, column=3, columnspan=1, pady=(0, 20), padx=(10, 20), sticky="ew")
+
+        self.entryRequest = customtkinter.CTkLabel(master=self.frameSearch,
+                                                      text="",
+                                                      text_font=("Roboto Medium", -16))
+        self.entryRequest.grid(row=2, column=0, columnspan=4, sticky="nsew")
 
         # ========== Error and Waiting modules ==========
         self.labelWaiting = customtkinter.CTkLabel(master=self.frameResult,

@@ -11,7 +11,7 @@ import pandas as pd
 import os
 import openai
 
-openai.api_key = "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"
+openai.api_key = ""
 
 PATH = os.path.dirname(os.path.realpath(__file__))
 
